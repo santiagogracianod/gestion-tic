@@ -164,11 +164,13 @@ story.append(Paragraph(
     sec_body))
 story.append(Spacer(1, 0.25*cm))
 story.append(Paragraph(
-    'El presente análisis DOFA se construye considerando tres dimensiones críticas identificadas en el caso: '
-    '<b>(1) altos niveles de fraude digital</b>, <b>(2) baja fidelización de clientes</b> y '
-    '<b>(3) dificultades de escalabilidad de la infraestructura</b>. A partir de este diagnóstico, '
-    'la Matriz CAME traduce los hallazgos en estrategias concretas y las acciones estratégicas '
-    'definen la hoja de ruta hacia los resultados esperados.',
+    'El presente análisis DOFA se construye sobre los cinco problemas centrales identificados en el caso: '
+    '<b>(1) altos niveles de fraude digital</b>, <b>(2) baja fidelización de clientes</b>, '
+    '<b>(3) dificultades de escalabilidad de infraestructura</b>, '
+    '<b>(4) adopción tecnológica y resistencia organizacional</b> y '
+    '<b>(5) cumplimiento regulatorio fragmentado en LATAM</b>. '
+    'Cada ítem del diagnóstico se formula con el nivel de especificidad necesario para fundamentar '
+    'las estrategias CAME y las acciones definidas en las secciones siguientes.',
     sec_body))
 story.append(Spacer(1, 0.5*cm))
 
@@ -204,28 +206,28 @@ lbl_neg    = Paragraph('NEGATIVO', label_ext)
 
 fortalezas_items = [
     'Buena base en Infraestructura TI: NeoBankX cuenta con una infraestructura basada en cloud y microservicios, lo que le permite adaptarlo a cambios en la demanda a futuro.',
-    'Capacidad de analítica avanzada: La organización posee capacidades iniciales en el uso de datos e inteligencia artificial, lo que representa una base para la toma de decisiones más precisas',
-    'Enfoque en experiencia digital: El modelo de negocio está orientado a canales digitales, lo que permite una interacción directa y continua con el cliente',
+    'Motor ML de decisión crediticia en producción: La organización tiene modelos de machine learning activos para scoring alternativo, con acceso a datasets transaccionales que constituyen ventaja diferencial frente a la banca tradicional.',
+    'Modelo 100% digital con APIs propias: La ausencia de sucursales físicas y la disponibilidad de APIs internas permiten integración ágil con terceros bajo marcos de Open Banking, acortando el time-to-market de nuevos productos financieros.',
 ]
 debilidades_items = [
-    'Bajo nivel de madurez en gestión de fraude: Los procesos actuales no permiten una deteccion eficiente en tiempo real, generando vulnerabilidad operativa',
-    'Limitada explotación de datos: La organización no utiliza plenamente su informacion para personalizar servicios y mejorar la experiencia del cliente',
-    'Desalineación organizacional: Se evidencian dificultades en la adopción de nuevas tecnologías y resistencia al cambio',
-    'Procesos TI no completamente optimizados: Existen oportunidades de mejora en la integracion y automatización de procesos ',
-    'Dificultad para escalar infraestructura ante crecimiento de usuarios ',
+    'Detección de fraude reactiva sin cobertura en tiempo real: Los mecanismos actuales operan en modo batch con latencia de horas, lo que impide alcanzar la meta de reducción del 35% sin intervención del modelo en tiempo real sobre cada transacción.',
+    'Datos de cliente subutilizados para fidelización: A pesar del volumen de datos transaccionales disponibles, no se aplican motores de personalización ni segmentación predictiva, lo que explica la baja retención y la ausencia de productos diferenciados por perfil.',
+    'Conflicto no resuelto entre equipos de riesgo y científicos de datos: La tensión entre las áreas de riesgo tradicional y los equipos de datos bloquea la adopción de modelos de IA y ralentiza decisiones que requieren validación cruzada entre dominios.',
+    'Madurez DevSecOps insuficiente: Los pipelines de desarrollo carecen de controles de seguridad integrados (SAST, DAST, gestión de secretos), lo que introduce vulnerabilidades en cada despliegue y dificulta el cumplimiento regulatorio ágil.',
+    'Infraestructura no preparada para picos de demanda: La arquitectura actual requiere intervención manual ante crecimientos abruptos de usuarios, limitando la continuidad operativa y la experiencia del cliente en eventos de alta transaccionalidad.',
 ]
 oportunidades_items = [
-    'Crecimiento del sector fintech: La expansión del sector en Latinoamérica genera oportunidades de captación de nuevos clientes',
-    'Open Banking y APIs: La apertura de APIs permite la integración con terceros y la creación de nuevos modelos de negocio',
-    'Avances en inteligencia artificial: Tecnologías disponibles que pueden mejorar procesos, productos, scoring alternativo y experiencia del cliente',
-    'Mayor adopción digital: Incremento en la confianza y uso de servicios financieros digitales por parte de los usuarios',
+    'Open Banking regulado en LATAM: Marcos normativos en México, Colombia y Brasil están abriendo mandatos de interoperabilidad que NeoBankX puede capitalizar antes que competidores con menor agilidad tecnológica.',
+    'Plataformas MLOps y modelos de IA accesibles: La disponibilidad de servicios gestionados (SageMaker, Vertex AI) y modelos preentrenados reduce el costo y tiempo de implementar scoring alternativo con IA en nuevos segmentos y mercados.',
+    'Población desbancarizada en crecimiento: Más del 50% de adultos en LATAM sin acceso a crédito formal representan un segmento alcanzable a través de scoring alternativo, diferenciando a NeoBankX frente a la banca convencional.',
+    'Ecosistema fintech colaborativo (embedded finance): La tendencia de alianzas B2B con retailers, fintechs de pagos y aseguradoras permite ampliar la propuesta de valor sin incrementar proporcionalmente la base de costos operativos.',
 ]
 amenazas_items = [
-    'Ciberataques: El incremento de amenazas digitales representa un riesgo constante para la seguridad y continuidad de los servicios',
-    'Regulación estricta: El entorno regulatorio puede limitar la innovación y aumentar costos operativos',
-    'Competencia intensiva: Otras fintech y bancos digitales compiten por el mismo segmento de mercado',
-    'Evolución tecnológica acelerada: Puede generar obsolescencia si no se adapta oportunamente',
-    'Concentración tecnológica y dependencia de proveedores cloud',
+    'Fraude digital sofisticado y creciente: Vectores como phishing dirigido, deepfakes financieros y ataques a APIs REST están en aumento en LATAM; sin detección en tiempo real, cada brecha erosiona la confianza del cliente y el resultado financiero.',
+    'Fragmentación regulatoria multi-país: Distintos regímenes de PLD, protección de datos (LGPD Brasil, Ley 1581 Colombia) y Open Banking por jurisdicción elevan el costo de cumplimiento y frenan la escalabilidad regional.',
+    'Competencia con mayor escala: Actores como Nubank, Mercado Pago y Ualá operan con economías de escala que les permiten subsidiar servicios y fijar precios por debajo del costo, presionando los márgenes del segmento objetivo.',
+    'Concentración en proveedor cloud único: La dependencia de un solo hiperescalador expone a NeoBankX a riesgo de disponibilidad, cambios de precio y exigencias de soberanía del dato en distintas jurisdicciones.',
+    'Aceleración tecnológica y deuda técnica latente: La velocidad de evolución en modelos de IA generativa y arquitecturas de seguridad exige inversión continua; sin gobierno tecnológico, el stack actual puede quedar obsoleto en 18–24 meses.',
 ]
 
 dofa_data = [
