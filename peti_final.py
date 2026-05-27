@@ -254,17 +254,19 @@ metricas = [
     ('35%', 'Reducción\ndel Fraude'),
     ('99.9%', 'Disponibilidad\nde Servicios'),
     ('25%', 'Incremento\ndel NPS'),
-    ('3x', 'Escalabilidad\nde Usuarios'),
+    ('2x', 'Escalabilidad\nde Usuarios'),
 ]
 met_data = [[
-    Table([[
-        Paragraph(v, S('MV', fontSize=18, textColor=AZUL, fontName='Helvetica-Bold',
-                        alignment=TA_CENTER, leading=22)),
-        Paragraph(l, S('ML', fontSize=7.5, textColor=GRIS_MED, fontName='Helvetica',
-                         alignment=TA_CENTER, leading=10)),
-    ]], colWidths=[usable_w/4 - 0.3*cm])
+    # Cada celda es una tabla interna con dos filas: valor (arriba) y etiqueta (abajo)
+    Table([
+        [Paragraph(v, S('MV', fontSize=18, textColor=AZUL, fontName='Helvetica-Bold',
+                        alignment=TA_CENTER, leading=22))],
+        [Paragraph(l, S('ML', fontSize=7.5, textColor=GRIS_MED, fontName='Helvetica',
+                         alignment=TA_CENTER, leading=10))],
+    ], colWidths=[usable_w/4 - 0.3*cm])
     for v, l in metricas
-]]
+]
+]
 met_table = Table([met_data[0]], colWidths=[usable_w/4]*4)
 met_table.setStyle(TableStyle([
     ('BACKGROUND', (0,0), (-1,-1), VERDE_L),
@@ -295,14 +297,15 @@ story.append(Spacer(1, 0.2*cm))
 
 mv_items = [
     ('Misión', VERDE, VERDE_L,
-     'Brindar servicios y experiencias financieras digitales simples, seguras y personalizadas '
-     'que respondan a las necesidades de cada cliente, respaldados por tecnología de vanguardia, '
-     'con foco en el relacionamiento a largo plazo.'),
+
+     'Brindar servicios financieros digitales seguros, ágiles y personalizados '
+     ' mediante el uso de tecnologías de analítica avanzada e integración abierta,'
+     ' fortaleciendo la confianza y experiencia de nuestros clientes'),
     ('Visión', AZUL, AZUL_L,
-     'Consolidarnos como la institución financiera digital de mayor confianza en Latinoamérica, '
-     'distinguida por la solidez de su seguridad, la precisión de sus decisiones y la capacidad '
-     'de anticiparse a las necesidades financieras de sus clientes antes de que ellos mismos '
-     'las expresen.'),
+
+     'Consolidarnos como la institución financiera digital de mayor confianza en Latinoamérica: '
+     'distinguida por anticiparse a las necesidades del cliente, con cero tolerancia al fraude, '
+     'decisiones crediticias precisas y una plataforma de datos que sea referente regional de madurez digital y gobierno del dato'),
 ]
 for label, col, bg, texto in mv_items:
     t = Table([[
@@ -333,12 +336,12 @@ objetivos = [
      'Fortalecer la confianza y el relacionamiento a largo plazo con los clientes de NeoBankX, '
      'mediante la implementación de servicios financieros personalizados sustentados en analítica '
      'avanzada, orientados a incrementar la fidelización, reducir la tasa de abandono y '
-     'disminuir el fraude digital en un 35%. <i>(Alineado a la Misión)</i>'),
+     'disminuir el fraude digital en un 35%.'),
     ('OE2', AZUL,
      'Posicionar a NeoBankX como referente de seguridad y confianza en la industria financiera '
      'digital latinoamericana, a través de arquitecturas robustas, cumplimiento regulatorio '
      'riguroso y procesos de decisión transparentes que protejan el patrimonio y la privacidad '
-     'de cada cliente. <i>(Alineado a la Visión)</i>'),
+     'de cada cliente.'),
 ]
 for num, col, texto in objetivos:
     t = Table([[
@@ -422,44 +425,95 @@ story.append(Spacer(1, 0.4*cm))
 
 story.append(Paragraph('3.2 Cadena de Valor Optimizada con TI', sub_title))
 story.append(Paragraph(
-    'La optimización de la cadena de valor mediante TI transforma cada actividad en una '
-    'fuente de ventaja competitiva digital para NeoBankX:', sec_body))
+    'La siguiente tabla muestra <b>exactamente cómo TI interviene en cada actividad</b> '
+    'de la cadena de valor, qué herramienta o solución tecnológica se aplica, y cómo '
+    'eso resuelve directamente las dos brechas centrales del caso '
+    '(<b>C1</b> = Confianza Digital · <b>C2</b> = Personalización e Integración):',
+    sec_body))
 story.append(Spacer(1, 0.25*cm))
 
 opt_data = [
-    ['Actividad', 'Transformación con TI', 'Valor Estratégico'],
-    ['Adquisición de clientes', 'Analítica avanzada para segmentación\ny marketing personalizado', 'Clientes con mayor afinidad\ny potencial de fidelización'],
-    ['Onboarding digital', 'Automatizado, biométrico y seguro\ncon KYC digital', 'Reducción de fraude en apertura\ny mejor experiencia'],
-    ['Evaluación crediticia', 'Scoring alternativo con ML\ne IA sobre datos no tradicionales', 'Decisiones más precisas,\nrápidas e inclusivas'],
-    ['Procesamiento transaccional', 'Tiempo real, microservicios,\nAPI-first y event-driven', 'Alta escalabilidad\ny resiliencia'],
-    ['Gestión de riesgos/fraude', 'Detección en tiempo real\ncon modelos ML supervisados', 'Prevención proactiva\n(-35% fraude)'],
-    ['Atención al cliente', 'Experiencia omnicanal,\nchatbots con IA y app móvil', 'Mejora NPS y reducción\ncostos de atención'],
-    ['Fidelización', 'Personalización continua\ny motores de recomendación', 'Incremento retención\ny cross-selling'],
+    ['Actividad', 'Problema que resuelve', 'Solución TI específica', 'Impacto medible', 'Brecha'],
+    ['Adquisición\nde clientes',
+     'Segmentación genérica sin base en datos del comportamiento real',
+     'Analítica avanzada: modelos de propensión, clustering de perfiles (Python + Databricks)',
+     'CAC -20%\nConversión +15%',
+     'C2'],
+    ['Onboarding\ndigital',
+     'KYC manual, lento y propenso a fraude en la apertura de cuentas',
+     'Biometría + OCR + validación en tiempo real (AWS Rekognition / ML propio)',
+     'Fraude apertura -40%\nOnboarding: 3min',
+     'C1'],
+    ['Evaluación\ncrediticia',
+     'Scoring tradicional excluye clientes sin historial bancario formal',
+     'Scoring alternativo IA: datos transaccionales, comportamentales y de open banking (scikit-learn + MLflow)',
+     'Precisión crédito +30%\nInclusión financiera',
+     'C2'],
+    ['Procesamiento\ntransaccional',
+     'Latencia alta y sistema no escalable ante picos de demanda',
+     'Arquitectura event-driven: Apache Kafka + microservicios + API Gateway Kong',
+     'Latencia <100ms\nEscalabilidad 2x',
+     'C1 + C2'],
+    ['Gestión de\nriesgos y fraude',
+     'Detección reactiva: el fraude se detecta después de ocurrir',
+     'Modelo ML supervisado en tiempo real: análisis de patrones transaccionales (TensorFlow + Feature Store)',
+     'Fraude -35%\nFalsos positivos -25%',
+     'C1'],
+    ['Atención\nal cliente',
+     'Canales aislados, sin historial unificado del cliente entre canales',
+     'CRM unificado + chatbot IA + app móvil (React Native) con historial 360°',
+     'NPS +25%\nCosto atención -30%',
+     'C2'],
+    ['Retención\ny fidelización',
+     'Ofertas genéricas no alineadas al comportamiento ni necesidades del cliente',
+     'Motor de recomendación personalizado: modelos colaborativos + content-based (MLflow + Feature Store)',
+     'Churn -20%',
+     'C2'],
+    ['Open Banking\ne integración',
+     'Ecosistema cerrado sin integración con terceros ni nuevos modelos de negocio',
+     'APIs abiertas (OpenAPI 3.0) + Kong Gateway + OAuth2 + Webhooks para socios fintech',
+     'Nuevos ingresos\n+ Nuevas verticales de negocio',
+     'C2'],
 ]
 
-opt_col_w = [usable_w*0.28, usable_w*0.38, usable_w*0.34]
-opt_style = S('OT', fontSize=8.2, textColor=GRIS_OSC, fontName='Helvetica', leading=12)
-opt_rows = []
+opt_col_w = [usable_w*0.20, usable_w*0.24, usable_w*0.30, usable_w*0.18, usable_w*0.08]
+opt_rows = []   
 for i, row in enumerate(opt_data):
     if i == 0:
-        opt_rows.append([Paragraph(c, S('OH', fontSize=8.5, textColor=BLANCO,
-                         fontName='Helvetica-Bold', leading=12, alignment=TA_CENTER))
+        opt_rows.append([Paragraph(c, S('OH', fontSize=8, textColor=BLANCO,
+                         fontName='Helvetica-Bold', leading=11, alignment=TA_CENTER))
                          for c in row])
     else:
-        opt_rows.append([Paragraph(c, opt_style) for c in row])
+        brecha_col = row[4]
+        brecha_color = ROJO if brecha_col == 'C1' else (AZUL if brecha_col == 'C2' else AMBAR)
+        opt_rows.append([
+            Paragraph(row[0], S('OA', fontSize=7.8, textColor=GRIS_OSC, fontName='Helvetica-Bold', leading=11)),
+            Paragraph(row[1], S('OB', fontSize=7.5, textColor=GRIS_MED, fontName='Helvetica', leading=11)),
+            Paragraph(row[2], S('OC', fontSize=7.5, textColor=GRIS_OSC, fontName='Helvetica', leading=11)),
+            Paragraph(row[3], S('OD', fontSize=7.5, textColor=VERDE, fontName='Helvetica-Bold', leading=11)),
+            Paragraph(brecha_col, S('OE', fontSize=7.5, textColor=BLANCO, fontName='Helvetica-Bold',
+                                     leading=11, alignment=TA_CENTER)),
+        ])
 
 opt_table = Table(opt_rows, colWidths=opt_col_w)
-opt_table.setStyle(TableStyle([
+# Build row-level bg styles for brecha column
+opt_styles = [
     ('BACKGROUND', (0,0), (-1,0), VERDE),
     ('ROWBACKGROUNDS', (0,1), (-1,-1), [BLANCO, GRIS_L]),
     ('GRID', (0,0), (-1,-1), 0.4, GRIS_BRD),
     ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
     ('TOPPADDING', (0,0), (-1,-1), 5),
     ('BOTTOMPADDING', (0,0), (-1,-1), 5),
-    ('LEFTPADDING', (0,0), (-1,-1), 6),
-    ('RIGHTPADDING', (0,0), (-1,-1), 6),
+    ('LEFTPADDING', (0,0), (-1,-1), 5),
+    ('RIGHTPADDING', (0,0), (-1,-1), 5),
     ('ALIGN', (0,0), (-1,0), 'CENTER'),
-]))
+    ('ALIGN', (4,1), (4,-1), 'CENTER'),
+]
+brecha_colors = {'C1': ROJO, 'C2': AZUL, 'C1 + C2': AMBAR}
+for i, row in enumerate(opt_data[1:], 1):
+    bc = brecha_colors.get(row[4], GRIS_MED)
+    opt_styles.append(('BACKGROUND', (4,i), (4,i), bc))
+opt_table.setStyle(TableStyle(opt_styles))
 story.append(opt_table)
 story.append(Spacer(1, 0.4*cm))
 
